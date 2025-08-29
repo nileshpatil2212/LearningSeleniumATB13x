@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Task_28th_Aug_Start_Free_Trial {
@@ -35,6 +36,9 @@ public class Task_28th_Aug_Start_Free_Trial {
 //        WebElement trial_link = driver.findElement(By.className("text-link Td(n)"));
         driver.findElement(By.linkText("Start a free trial")).click();
 
+        System.out.println(driver.getCurrentUrl());
+        Assert.assertTrue(driver.getCurrentUrl().contains("free-trial"));
+
         // Step 2 - Find Business Email and Add
 
 //        <input
@@ -47,8 +51,8 @@ public class Task_28th_Aug_Start_Free_Trial {
 //        data-qa="page-su-step1-v1-email"
 //        required="">
 
-        WebElement trial_link = driver.findElement(By.id("page-v1-step1-email"));
-        trial_link.sendKeys("abc");
+        WebElement email = driver.findElement(By.id("page-v1-step1-email"));
+        email.sendKeys("abc");
 
         // Step 3 - Find I Agree to VWO Policy Checkox and Checked
 
@@ -59,7 +63,9 @@ public class Task_28th_Aug_Start_Free_Trial {
 //        id="page-free-trial-step1-cu-gdpr-consent-checkbox"
 //        value="true" data-qa="page-free-trial-step1-gdpr-consent-checkbox">
 
-        driver.findElement(By.id("page-free-trial-step1-cu-gdpr-consent-checkbox")).click();
+//        driver.findElement(By.id("page-free-trial-step1-cu-gdpr-consent-checkbox")).click();
+        WebElement checkbox_policy = driver.findElement(By.name("gdpr_consent_checkbox"));
+        checkbox_policy.click();
 
         // Step 4 - Click on Create a Free Trial Account
         //<button
@@ -69,10 +75,13 @@ public class Task_28th_Aug_Start_Free_Trial {
         // data-qa="page-su-submit">
         // Create a Free Trial Account</button>
 
+        WebElement button = driver.findElement(By.tagName("button"));
+        button.click();
 
+        WebElement error_msg = driver.findElement(By.className("invalid-reason"));
+        Assert.assertEquals(error_msg.getText(),"The email address you entered is incorrect.");
 
-
-
+        driver.quit();
 
     }
 
