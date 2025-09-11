@@ -19,12 +19,25 @@ public class TestSelenium26_Input_Checkbox_Radio extends CommonToAll {
         driver.get("https://awesomeqa.com/practice.html");
 
         WebElement firstname = driver.findElement(By.xpath("//input[@name=\"firstname\"]"));
+        WebElement firstname1 = driver.findElement(By.name("firstname"));
         firstname.sendKeys("Nilesh");
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            // Radio Button
 
         WebElement femaleRadio  = driver.findElement(By.xpath("//input[@id=\"sex-1\"]"));
 //        WebElement femaleRadio  = driver.findElement(By.xpath("//input[@value=\"Female\"]"));
         femaleRadio .click();
 
+        WebElement YearOfExp = driver.findElement(By.xpath("//input[@id='exp-1']"));
+        YearOfExp.click();
+
+        // Radio Button
         WebElement profession = driver.findElement(By.xpath("//input[@id=\"profession-1\"]"));
         profession.click();
 
